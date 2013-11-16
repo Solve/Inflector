@@ -1,0 +1,4 @@
+solve-inflector
+===============
+
+Inflector package
