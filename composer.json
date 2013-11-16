@@ -18,5 +18,6 @@
 
     "autoload": {
         "psr-0": {"Solve\\Utils": ""}
-    }
+    },
+    "target-dir": "Solve/Utils/"
 }
