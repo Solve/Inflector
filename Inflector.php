@@ -402,16 +402,16 @@ class Inflector {
      * Provide a short version of price converted to string
      * @param $price
      * @param bool $keepFloat
-     * @param string $currencySign
+     * @param string $currencyShortLabel
      * @param string $language
      * @return mixed
      */
-    public static function priceToStringShort($price, $keepFloat = true, $currencySign = 'грн.', $language = null) {
+    public static function priceToStringShort($price, $keepFloat = true, $currencyShortLabel = 'грн.', $language = null) {
         if ($language == null) $language = self::$_defaultLanguage;
 
         $segments = array_merge(array(
                 array('коп.', 'коп.', 'коп.', 1),
-                array($currencySign, $currencySign, $currencySign, 0)
+                array($currencyShortLabel, $currencyShortLabel, $currencyShortLabel, 0)
             ),
             self::$_numbersScript[$language]['segments']
         );
