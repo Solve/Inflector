@@ -8,18 +8,13 @@
  */
 
 
-namespace Solve\Inflector\Tests;
+namespace Solve\Utils\InflectorTests;
 
-use Solve\Inflector\Inflector;
+use Solve\Utils\Inflector;
 
 require_once '../Inflector.php';
 
 class InflectorTest extends \PHPUnit_Framework_TestCase {
-
-    private $_engine;
-
-    public function setUp() {
-    }
 
     public function testTransliteration() {
         $this->assertEquals("Privet l'udi!", Inflector::transliterate("Привет люди!"), 'letter ju');

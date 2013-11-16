@@ -8,7 +8,7 @@
  */
 
 
-namespace Solve\Inflector;
+namespace Solve\Utils;
 
 /**
  * Class Inflector
@@ -17,7 +17,7 @@ namespace Solve\Inflector;
  * Class Inflector is used to operate with
  * It also supports russian and ukrainian language
  *
- * @version 1.0
+ * @version 1.1
  * @author Alexandr Viniychuk <alexandr.viniychuk@icloud.com>
  */
 class Inflector {
@@ -417,6 +417,71 @@ class Inflector {
         );
 
         return self::_numberToString($price, self::$_numbersScript[$language]['forms'], self::$_numbersScript[$language]['sex'], $segments, $keepFloat);
+    }
+
+    /**
+     * Return PHP-style variable dump
+     * @param $variable
+     * @param int $indentLevel
+     * @return string
+     */
+    public function dumpAsString($variable, $indentLevel = 0) {
+        if (is_bool($variable)) {
+            $result = $variable ? "true" : "false";
+        } elseif (is_null($variable)) {
+            $result = "null";
+        } elseif (is_array($variable)) {
+            $result = 'array (';
+
+            foreach($variable as $key=>$item) {
+                $result .= "\n". str_repeat(" ", ($indentLevel+1)*4);
+                $result .= self::dumpAsString($key, $indentLevel+1);
+                $result .= ' => ';
+                $result .= self::dumpAsString($item, $indentLevel+1).',';
+            }
+
+            $result .= "\n".str_repeat(" ", ($indentLevel)*4).')';
+        } elseif(is_string($variable) && (isset($variable[0]) && $variable[0] != '$')) {
+            $result = '"'. (strpos($variable, '$__lv') === false ? str_replace('"', '\"', $variable) : $variable) .'"';
+        } else {
+            $result = $variable;
+        }
+
+        return $result;
+    }
+
+    /**
+     * Using for beautify output
+     * @param $variable
+     * @param string $spacing
+     * @return string
+     */
+    public function dumperGet(&$variable, $spacing = "") {
+        if (is_array($variable)) {
+            $type = "Array[" . count( $variable ) . "]";
+        } elseif( is_object( $variable ) ) {
+            ob_start();
+            print_r($variable);
+            return ob_get_clean();
+
+        } elseif( gettype( $variable ) == "boolean" ) {
+            return $variable ? "true" : "false";
+        } elseif( is_null( $variable ) ) {
+            return "NULL";
+        } else {
+            ob_start();
+            var_dump($variable);
+            return ob_get_clean();
+        }
+        $buf = $type;
+        $spacing .= "    ";
+        for (reset( $variable ); list ( $k, $v ) = each( $variable );) {
+            if ($k === "GLOBALS" )
+                continue;
+            $buf .= "\n".$spacing.'['.$k.'] => ' . self::dumperGet( $v, $spacing);
+        }
+
+        return $buf;
     }
 
     /**
