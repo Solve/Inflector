@@ -1,7 +1,7 @@
 {
     "name": "solve/inflector",
     "type": "library",
-    "description": "Inflector class",
+    "description": " - [ Inflector ] class for string manipulating",
     "keywords": ["inflector","convertation","slug"],
     "homepage": "http://github.com/viniychuk/solve-inflector",
     "license": "MIT",
