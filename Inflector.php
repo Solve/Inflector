@@ -381,13 +381,13 @@ class Inflector {
 
     /**
      * Convert price to string and add localized money label
-     * @param $number
+     * @param $price
      * @param bool $keepFloat
      * @param string $currency
      * @param string $language by default overwritten by Inflector's default language
      * @return mixed
      */
-    public static function priceToStringLong($number, $keepFloat = true, $currency = "uah", $language = null) {
+    public static function priceToStringLong($price, $keepFloat = true, $currency = "uah", $language = null) {
         if ($language == null) $language = self::$_defaultLanguage;
         if (empty(self::$_numbersScript[$language]) || empty(self::$_numbersScript[$language]['sign'][$currency])) {
             trigger_error('You do not have a "'.$language.'/'.$currency.'" version for price labels. Add it via Inflector::addNumberLocalization');
@@ -395,18 +395,18 @@ class Inflector {
 
         $segments = array_merge(self::$_numbersScript[$language]['sign'][$currency], self::$_numbersScript[$language]['segments']);
 
-        return self::_numberToString($number, self::$_numbersScript[$language]['forms'], self::$_numbersScript[$language]['sex'], $segments, $keepFloat);
+        return self::_numberToString($price, self::$_numbersScript[$language]['forms'], self::$_numbersScript[$language]['sex'], $segments, $keepFloat);
     }
 
     /**
      * Provide a short version of price converted to string
-     * @param $number
+     * @param $price
      * @param bool $keepFloat
      * @param string $currencySign
      * @param string $language
      * @return mixed
      */
-    public static function priceToStringShort($number, $keepFloat = true, $currencySign = 'грн.', $language = null) {
+    public static function priceToStringShort($price, $keepFloat = true, $currencySign = 'грн.', $language = null) {
         if ($language == null) $language = self::$_defaultLanguage;
 
         $segments = array_merge(array(
@@ -416,21 +416,21 @@ class Inflector {
             self::$_numbersScript[$language]['segments']
         );
 
-        return self::_numberToString($number, self::$_numbersScript[$language]['forms'], self::$_numbersScript[$language]['sex'], $segments, $keepFloat);
+        return self::_numberToString($price, self::$_numbersScript[$language]['forms'], self::$_numbersScript[$language]['sex'], $segments, $keepFloat);
     }
 
     /**
      * For internal use.
-     * @param $number
+     * @param $price
      * @param $numbersScript
      * @param $sex
      * @param $forms
      * @param $saveFloat
      * @return mixed
      */
-    private static function _numberToString($number, $numbersScript, $sex, $forms, $saveFloat) {
+    private static function _numberToString($price, $numbersScript, $sex, $forms, $saveFloat) {
         $result             = array();
-        $tmp                = explode('.', str_replace(',','.', $number));
+        $tmp                = explode('.', str_replace(',','.', $price));
 
         $integerPart        = number_format($tmp[0], 0, '','-');
         if ($integerPart == 0) {
