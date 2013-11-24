@@ -560,11 +560,12 @@ class Inflector {
      * @return mixed
      */
     private static function _getMorphed($n, $f1, $f2, $f5) {
-        $n = abs($n) % 100;
-        $n1= $n % 10;
-        if ($n>10 && $n<20) return $f5;
-        if ($n1>1 && $n1<5) return $f2;
-        if ($n1==1) return $f1;
+        $n  = abs($n) % 100;
+        $n1 = $n % 10;
+        if ($n > 10 && $n < 20) return $f5;
+        if ($n1 > 1 && $n1 < 5) return $f2;
+        if ($n1 == 1) return $f1;
+
         return $f5;
     }
 
