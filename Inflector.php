@@ -425,7 +425,7 @@ class Inflector {
      * @param int $indentLevel
      * @return string
      */
-    public function dumpAsString($variable, $indentLevel = 0) {
+    public static function dumpAsString($variable, $indentLevel = 0) {
         if (is_bool($variable)) {
             $result = $variable ? "true" : "false";
         } elseif (is_null($variable)) {
@@ -456,7 +456,7 @@ class Inflector {
      * @param string $spacing
      * @return string
      */
-    public function dumperGet(&$variable, $spacing = "") {
+    public static function dumperGet(&$variable, $spacing = "") {
         if (is_array($variable)) {
             $type = "Array[" . count( $variable ) . "]";
         } elseif( is_object( $variable ) ) {
