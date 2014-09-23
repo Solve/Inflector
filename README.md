@@ -1,5 +1,6 @@
 Solve inflector
 ===============
+v1.0.1
 
 This class allows you to solve different word-related tasks.
 
