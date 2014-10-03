@@ -160,6 +160,9 @@ class Inflector {
      * @return string
      */
     public static function underscore($text) {
+        $pregRule = '#[A-Z]+#';
+        $text = preg_replace_callback($pregRule, function($match) { return "_" . strtolower($match[0]); }, $text);
+
         return self::slugify($text, '_');
     }
 

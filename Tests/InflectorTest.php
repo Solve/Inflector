@@ -42,6 +42,8 @@ class InflectorTest extends \PHPUnit_Framework_TestCase {
 
     public function testUnderscore() {
         $this->assertEquals('hello_world', Inflector::underscore('Hello world!'), 'underscore');
+        $this->assertEquals('hello_world', Inflector::underscore('HelloWorld!'), 'underscore');
+        $this->assertEquals('this_istext', Inflector::underscore('ThisISText'), 'underscore');
     }
 
     public function testCamlize() {
