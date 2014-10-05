@@ -380,6 +380,7 @@ class Inflector {
                 return preg_replace($rule, $replacement, $word);
             }
         }
+        return $word;
     }
 
     /**
