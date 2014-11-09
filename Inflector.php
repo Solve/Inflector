@@ -182,6 +182,10 @@ class Inflector {
         return $text;
     }
 
+    public static function classify($text) {
+        return ucfirst(self::camelize($text));
+    }
+
     /**
      * Pluralize word
      *
