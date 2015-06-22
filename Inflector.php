@@ -582,4 +582,4 @@ class Inflector {
 
 
 
-} 
+}
