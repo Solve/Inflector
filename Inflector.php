@@ -166,19 +166,22 @@ class Inflector {
         return self::slugify($text, '_');
     }
 
+    public static function humanize($text) {
+        $text = explode(' ', str_replace(array('_', '/', '-'), ' ', $text));
+        for ($i = 0; $i < count($text); $i++) {
+            $text[$i] = ucfirst($text[$i]);
+        }
+        $text = implode(' ', $text);
+        return $text;
+    }
+
     /**
      * Camelize the text
      * @param $text
      * @return string
      */
     public static function camelize($text) {
-        $text = explode(' ', str_replace(array('_', '/', '-'), ' ', $text));
-
-        for ($i = 0; $i < count($text); $i++) {
-            $text[$i] = ucfirst($text[$i]);
-        }
-
-        $text = implode('', $text);
+        $text = implode(explode(' ', self::humanize($text)));
         return $text;
     }
 
@@ -418,9 +421,9 @@ class Inflector {
         if ($language == null) $language = self::$_defaultLanguage;
 
         $segments = array_merge(array(
-                array('коп.', 'коп.', 'коп.', 1),
-                array($currencyShortLabel, $currencyShortLabel, $currencyShortLabel, 0)
-            ),
+            array('коп.', 'коп.', 'коп.', 1),
+            array($currencyShortLabel, $currencyShortLabel, $currencyShortLabel, 0)
+        ),
             self::$_numbersScript[$language]['segments']
         );
 
