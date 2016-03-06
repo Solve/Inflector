@@ -167,7 +167,7 @@ class Inflector {
     }
 
     public static function humanize($text) {
-        $text = explode(' ', str_replace(array('_', '/', '-'), ' ', $text));
+        $text = explode(' ', str_replace(array('_', '/', '-', '.'), ' ', $text));
         for ($i = 0; $i < count($text); $i++) {
             $text[$i] = ucfirst($text[$i]);
         }
